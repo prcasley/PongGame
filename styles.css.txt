@@ -1,0 +1,12 @@
+# Game over
+if score_a >= 10:
+    score_display.clear()
+    score_display.write(f"GAME OVER - {player_a_name} wins!", align="center", font=("Courier", 24, "normal"))
+    wn.mainloop()
+    break
+
+if score_b >= 10:
+    score_display.clear()
+    score_display.write(f"GAME OVER - {player_b_name} wins!", align="center", font=("Courier", 24, "normal"))
+    wn.mainloop()
+    break
