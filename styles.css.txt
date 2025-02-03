@@ -10,3 +10,4 @@ if score_b >= 10:
     score_display.write(f"GAME OVER - {player_b_name} wins!", align="center", font=("Courier", 24, "normal"))
     wn.mainloop()
     break
+No longer Needed
