@@ -6,6 +6,10 @@ import os
 from collections import deque
 from datetime import datetime
 
+# Enable dummy video driver for headless automated tests if requested
+if os.environ.get("PONG_HEADLESS_TEST") == "1":
+    os.environ["SDL_VIDEODRIVER"] = "dummy"
+
 # Initialize Pygame
 pygame.init()
 
@@ -469,6 +473,15 @@ def main_game(screen, game_mode, p1_name, p2_name, settings):
 
     reset_ball()
 
+    # Fast start for automated tests
+    if os.environ.get("PONG_FAST_START") == "1":
+        need_countdown = False
+        countdown_timer = 0
+        ball.left = 2
+        ball.centery = HEIGHT // 2
+        ball_dx = -abs(ball_dx)
+        ball_dy = 0
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -660,4 +673,21 @@ def main():
                 break
 
 if __name__ == "__main__":
-    main()
+    # Headless automated simulation mode
+    if os.environ.get("PONG_HEADLESS_TEST") == "1":
+        screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        test_settings = DEFAULT_SETTINGS.copy()
+        test_settings.update({
+            "max_score": 1,
+            "powerups": False,
+            "mouse_control": False,
+            "difficulty": "Easy",
+            "theme": "Classic"
+        })
+        os.environ.setdefault("PONG_FAST_START", "1")
+        winner, final_score = main_game(screen, "1 Player", "Test1", "CPU", test_settings)
+        print("TEST_RESULT", winner, final_score[0], final_score[1])
+        pygame.quit()
+        sys.exit(0)
+    else:
+        main()
