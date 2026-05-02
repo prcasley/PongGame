@@ -1,0 +1,26 @@
+{
+  "players": {
+    "CPU": {
+      "wins": 1,
+      "losses": 0
+    },
+    "Test1": {
+      "wins": 0,
+      "losses": 1
+    }
+  },
+  "matches": [
+    {
+      "date": "2025-09-15T04:01:13.350621Z",
+      "winner": "CPU",
+      "loser": "Test1",
+      "left_score": 0,
+      "right_score": 1,
+      "mode": "1 Player",
+      "difficulty": "Easy",
+      "max_score": 1,
+      "theme": "Classic",
+      "powerups": false
+    }
+  ]
+}
